@@ -1,0 +1,59 @@
+#Program: Electronic Diagnostic Tool
+#Author: Andrew Bowling
+#Last Date Modified: 2024-12-13
+
+#This program is designed to help diagnose problem electronics
+#uses buttons interfaces to find which of the problem appliances you have
+#gives a code if the problem is found
+#Will also give an error / local number to call in order to better find your issue if not resolved
+
+
+import tkinter as tk
+from tkinter import messagebox
+
+class ElectronicsDiagnosticTool:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Electronics Diagnostic Tool")
+        self.current_device = None
+        self.devices = {
+            "Smartphone": ["Screen Issue", "Battery Issue", "Water Damage"],
+            "Laptop": ["Screen Issue", "Keyboard Issue", "Battery Issue"],
+            "Tablet": ["Screen Issue", "Battery Issue", "Charging Issue"],
+            "TV": ["No Signal", "Distorted Picture", "No Power"],
+            "Gaming Console": ["No Power", "Disc Drive Issue", "Controller Issue"]
+        }
+        self.issues = {
+            "Screen Issue": ["Cracked Screen", "Unresponsive Screen"],
+            "Battery Issue": ["Draining Quickly", "Not Charging"],
+            "Water Damage": ["Corrosion", "Short Circuit"],
+            "Keyboard Issue": ["Sticky Keys", "Non-Responsive Keys"],
+            "Charging Issue": ["Not Charging", "Charging Slowly"],
+            "No Signal": ["No Cable Signal", "No Antenna Signal"],
+            "Distorted Picture": ["Pixelated Picture", "Discolored Picture"],
+            "No Power": ["No Power Button Function", "No Power Cord Function"],
+            "Disc Drive Issue": ["Disc Not Reading", "Disc Stuck"],
+            "Controller Issue": ["Controller Not Connecting", "Controller Not Responding"]
+        }
+        self.problem_codes = {
+            "Cracked Screen": "CS001",
+            "Unresponsive Screen": "US001",
+            "Draining Quickly": "DQ001",
+            "Not Charging": "NC001",
+            "Corrosion": "CO001",
+            "Short Circuit": "SC001",
+            "Sticky Keys": "SK001",
+            "Non-Responsive Keys": "NRK001",
+            "Not Charging": "NC002",
+            "Charging Slowly": "CS002",
+            "No Cable Signal": "NCS001",
+            "No Antenna Signal": "NAS001",
+            "Pixelated Picture": "PP001",
+            "Discolored Picture": "DP001",
+            "No Power Button Function": "NPBF001",
+            "No Power Cord Function": "NPCF001",
+            "Disc Not Reading": "DNR001",
+            "Disc Stuck": "DS001",
+            "Controller Not Connecting": "CNC001",
+            "Controller Not Responding": "CNR001"
+        }
