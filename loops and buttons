@@ -1,0 +1,41 @@
+ self.greet_user()
+
+    def greet_user(self):
+        tk.Label(self.root, text="Welcome to the Electronics Diagnostic Tool!").pack()
+        tk.Label(self.root, text="Please select the type of device you are having issues with:").pack()
+        for device in self.devices:
+            tk.Button(self.root, text=device, command=lambda d=device: self.select_issue(d)).pack()
+        tk.Button(self.root, text="I don't know what I have", command=self.dont_know).pack()
+
+    def select_issue(self, device):
+        self.current_device = device
+        self.root.destroy()
+        self.root = tk.Tk()
+        self.root.title("Select Issue")
+        tk.Label(self.root, text=f"Please select the issue you are experiencing with your {device}:").pack()
+        for issue in self.devices[device]:
+            tk.Button(self.root, text=issue, command=lambda i=issue: self.select_sub_issue(i)).pack()
+
+    def select_sub_issue(self, issue):
+        self.root.destroy()
+        self.root = tk.Tk()
+        self.root.title("Select Sub-Issue")
+        tk.Label(self.root, text=f"Please select the sub-issue you are experiencing with your {issue}:").pack()
+        for sub_issue in self.issues[issue]:
+            tk.Button(self.root, text=sub_issue, command=lambda si=sub_issue: self.show_problem_code(si)).pack()
+
+    def show_problem_code(self, sub_issue):
+        problem_code = self.problem_codes[sub_issue]
+        messagebox.showinfo("Problem Code", f"The problem code for your issue is: {problem_code}")
+        self.root.destroy()
+
+    def dont_know(self):
+        messagebox.showinfo("Local Repair Shops", "Please visit a local repair shop for assistance. Prices may vary.")
+        self.root.destroy()
+
+    def run(self):
+        self.root.mainloop()
+
+if __name__ == "__main__":
+    diagnostic_tool = ElectronicsDiagnosticTool()
+    diagnostic_tool.run()
